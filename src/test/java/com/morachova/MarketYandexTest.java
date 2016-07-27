@@ -26,7 +26,7 @@ public class MarketYandexTest {
     }
 
     @Test
-    public void testNokiaLumia930Search() {
+    public void testNokiaLumia830Search() {
         search("nokia"); //унифицировала строку поиска на главной странице для универсальности использования метода в дальнейших тестах
         chooseCategory("Мобильные телефоны"); //как и в предыдущем варианте, при помощи Селенида мы можем этот метод использовать для перехода в любую категорию без необходимости подбора сложных селекторов
 
@@ -35,17 +35,17 @@ public class MarketYandexTest {
                 openFoundResult(); //проверка которой не было в задании, но так мы точно не только нашли, но и можем открыть элемент и удостоверится, что страница прогрузилась.
                 break;
             } else if (nextPage.is(visible)) { //продолжаем проверять по-странично пока не найдем искомое
-                System.out.println("Phone is not found in current page results"); //не обязательные стринги, можно их удалить
+                System.out.println("Phone is not found on current page results"); //не обязательные стринги, можно их удалить. Или наоборот добавить переменную номера проверяемой страницы
                 nextPage.click();
             } else { //в случае если страницы либо закончились, либо мы дошли до 10-й, поиск остановится сообщив нам, что ничего не найдено
-                System.out.println("Phone is not found in all search results pages");
+                System.out.println("Phone is not found on all search results pages");
                 break;
             }
         }
     }
 
     SelenideElement nextPage = $(".button_side_right.button_type_arrow");
-    SelenideElement searchItem = $(By.linkText("Nokia Lumia 930")); //также можно искать через css ".snippet-card__header-text" и по содержанию всех найденных элементов, но по точному тексту проще читается и/или меняется на любое другое значение
+    SelenideElement searchItem = $(By.linkText("Nokia Lumia 830")); //также можно искать через css ".snippet-card__header-text" и по содержанию всех найденных элементов, но по точному тексту проще читается и/или меняется на любое другое значение
 
     public void search(String searchText) {
         $("#header-search").setValue(searchText).pressEnter();
@@ -58,6 +58,6 @@ public class MarketYandexTest {
 
     public void openFoundResult() {
         searchItem.click();
-        assertEquals("Купить смартфон Nokia Lumia 930 — выгодные цены на Яндекс.Маркете", title()); //неявная проверка того, что страница открылась и подгрузилась.
+        assertEquals("Купить смартфон Nokia Lumia 830 — выгодные цены на Яндекс.Маркете", title()); //неявная проверка того, что страница открылась и подгрузилась.
     }
 }
